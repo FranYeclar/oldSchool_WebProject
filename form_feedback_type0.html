@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback Form</title>
+    <style>
+        /* Include your CSS styles here */
+        .one {
+            background-image: radial-gradient(
+                at bottom left,
+                orange,
+                magenta
+            );
+        }
+        .two {
+            background-image: radial-gradient(
+                at bottom right,
+                orange,
+                blue
+            );
+        }
+        
+        /* Global Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .alert-box{
+            background-color: #ffffff;
+            padding-left: 10px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            padding-right: 10px;
+            border: solid 0.20rem;
+            border-color: black;
+            font-family: cursive;
+            height: 10rem;
+            width: 80rem;
+        }    
+        /* Header Styles */
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Navigation Styles */
+        nav {
+            background-color: #444;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline-block;
+            margin: 0 10px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+        nav ul li:hover{
+                background-color: purple;
+        }
+
+        /* Content Styles */
+        main {
+            padding: 20px;
+        }
+
+        h1 {
+            color: whitesmoke;
+        }
+        .NEW {
+            color: yellow;
+        }
+
+        /* Feedback Form Styles */
+        .feedback-form {
+            background-color: #f4f4f4;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            padding: 20px;
+        }
+
+        .feedback-form label {
+            display: block;
+            margin: 10px 0;
+        }
+
+        .feedback-form input[type="text"],
+        .feedback-form input[type="email"],
+        .feedback-form textarea {
+            width: 100%;
+            padding: 10px;
+        }
+
+        .feedback-form input[type="checkbox"] {
+            margin: 10px 0;
+        }
+
+        .feedback-form button {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+        .feedback-form button:hover{
+            background-color: purple;
+        }
+    </style>
+    <script>
+        /*
+        function validateForm() {
+            // Validation for the Name field
+            var nameInput = document.getElementById('name');
+            if (nameInput.value.trim() === '') {
+                alert('Please enter your name.');
+                nameInput.focus();
+                return false;
+            }
+    
+            // Validation for the Email field
+            var emailInput = document.getElementById('email');
+            var emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+            if (!emailRegex.test(emailInput.value)) {
+                alert('Please enter a valid email address.');
+                emailInput.focus();
+                return false;
+            }
+    
+            // Validation for Rating (Checkboxes)
+            var ratingInputs = document.getElementsByName('rating');
+            var isChecked = false;
+            for (var i = 0; i < ratingInputs.length; i++) {
+                if (ratingInputs[i].checked) {
+                    isChecked = true;
+                    break;
+                }
+            }
+            if (!isChecked) {
+                alert('Please select a rating from 1 to 5.');
+                return false;
+            }
+            
+            // Additional validation can be added for other fields as needed
+    
+            // If all validations pass, the form will be submitted
+        
+            if (validateForm()) {
+                // Retrieve form values
+                var name = document.getElementById('name').value;
+                var email = document.getElementById('email').value;
+                var title = document.getElementById('title').value;
+                var feedback = document.getElementById('feedback').value;
+
+                // Retrieve the selected rating
+                var rating = '';
+                var ratingInputs = document.getElementsByName('rating');
+                for (var i = 0; i < ratingInputs.length; i++) {
+                    if (ratingInputs[i].checked) {
+                        rating = ratingInputs[i].value;
+                        break;
+                    }
+                }
+
+                // Display values in an alert box
+                var message = "Name: " + name + "\n" +
+                    "Email: " + email + "\n" +
+                    "Rating: " + rating + "\n" +
+                    "Title: " + title + "\n" +
+                    "Feedback: " + feedback;
+
+                alert(message);
+            } else {
+                // If validation fails, prevent the form from submitting
+                event.preventDefault();
+            }
+        }
+        */
+        function validateForm() {
+            var name = document.getElementById('name').value;
+            var email = document.getElementById('email').value;
+            var rating = document.getElementById('rating').value;
+            var title = document.getElementById('title').value;
+            var feedback = document.getElementById('feedback').value;
+            
+
+            // Name validation
+            if (name.trim() === '') {
+                document.getElementById('name-error').textContent = 'Name is required';
+                return false;
+            }
+
+            // Email validation
+            var emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+            if (!emailRegex.test(email)) {
+                document.getElementById('email-error').textContent = 'Enter a valid email address';
+                return false;
+            }
+
+            // Rating validation
+            if (rating < 1 || rating > 5 || isNaN(rating)) {
+                document.getElementById('rating-error').textContent = 'Rating must be between 1 and 5';
+                return false;
+            }
+            
+            // Display the credentials in the alert box
+            var alertMessage = `Name: ${name}\nEmail: ${email}\nRating: ${rating}\nTitle: ${title}\nFeedback: ${feedback}`;
+            document.getElementById('alert-box').textContent = alertMessage;
+            document.getElementById('alert-box').style.display = 'block';
+
+            // Prevent form submission
+            return false;
+        }
+        
+
+
+    </script>
+    
+</head>
+<body>
+    <header>
+        <h1>Feedback Form</h1>
+    </header>
+    <nav>
+        <ul>
+          <li><a href="home.html">Home</a></li>
+          <li><a href="biography_as.html">About (PVC) Awards</a></li>
+          <li><a href="set_2.html">List of Param Veer chakra Award Holders</a></li>
+          <li><a href="video_file.html">VIDEO</a></li>
+          <li><a href="contact_credit.html">About Us</a></li>
+          <li><a href="form_feedback_type0.html">Feedback</a></li>
+        </ul>
+      </nav>
+    <main>
+        <div class="feedback-form">
+            <form onsubmit=" return validateForm();">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required placeholder="ENTER A NAME">
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required placeholder="ENTER A DESIRED EMAIL">
+
+                <div class="form-group">
+                    <label for="rating">Rating (1-5):</label>
+                    <input type="number" id="rating" name="rating" min="1" max="5" required>
+                    <span class="error-message" id="rating-error"></span>
+                </div>
+                
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title" required placeholder="GIVE TITLE DESCRIPTION">
+
+                <label for="feedback">Feedback in Detail:</label>
+                <textarea id="feedback" name="feedback" required placeholder="FIVE FEEDBACK DESCRIPTION" rows="10" cols="50"></textarea>
+
+
+                <button type="submit">Submit Feedback</button>
+            </form>
+            <br>
+            <br>
+            <br>    
+            <div class="alert-box" id="alert-box"></div>
+        </div>
+    </main>
+</body>
+</html>
